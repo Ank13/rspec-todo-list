@@ -44,9 +44,12 @@ describe List do
 
   describe "#complete_task" do
     context 'with valid input' do
-      it 'changes a task to complete' do
-        list.complete_task(0).should eq(true)
+
+      it 'expects task to receive complete message' do
+        list.tasks[0].should_receive(:complete!)
+        list.complete_task(0)
       end
+
     end
 
     context 'with invalid input' do
@@ -58,7 +61,7 @@ describe List do
 
   describe "#delete_task" do
     context 'with valid input' do
-      it 'deletes a task from the list' do
+      it 'expects task to receive delete_at message' do
       a = list.tasks[0]
       list.delete_task(0)
       list.tasks.include?(a).should eq(false)

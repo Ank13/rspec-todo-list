@@ -11,11 +11,19 @@ class List
   end
 
   def complete_task(index)
-    tasks[index].complete!
+    if index <= tasks.length
+      tasks[index].complete!
+    else
+      raise InvalidTaskError
+    end
   end
 
   def delete_task(index)
-    tasks.delete_at(index)
+    if index <= tasks.length
+      tasks.delete_at(index)
+    else
+      raise InvalidTaskError
+    end
   end
 
   def completed_tasks
@@ -26,3 +34,5 @@ class List
     tasks.select { |task| !task.complete? }
   end
 end
+
+class InvalidTaskError < StandardError; end
